@@ -18,12 +18,16 @@
 	// 	document.body.appendChild(text);
 	// 	return false;
 	// }
-	document.addEventListener('contextmenu',function(ev){
-		var ev = ev || event;
-		var text = document.createElement('div');
-		text.innerHTML = '我只是来测试手机端能否通过长按触发事件的，呜呜';
-		document.body.appendChild(text);
-		ev.cancelBubble = true;
-		ev.preventDefault();
-	})
+	window.onload = function(){
+		document.documentElement.style.webkitTouchCallout='none';
+		document.addEventListener('contextmenu',function(ev){
+			var ev = ev || event;
+			var text = document.createElement('div');
+			text.innerHTML = '我只是来测试手机端能否通过长按触发事件的，呜呜';
+			document.body.appendChild(text);
+			ev.cancelBubble = true;
+			ev.preventDefault();
+		})
+	}
+
 </script>
