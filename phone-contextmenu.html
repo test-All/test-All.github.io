@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>phone-contextmenu</title>
+	<style>
+		div{ margin: 0 auto; width: 400px; background:rgba(0,0,0,.3);}
+	</style>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	// document.oncontextmenu = function(){
+	// 	var text = document.createElement('div');
+	// 	text.innerHTML = '我只是来测试手机端能否通过长按触发事件的，呜呜';
+	// 	document.body.appendChild(text);
+	// 	return false;
+	// }
+	document.addEventListener('contextmenu',function(ev){
+		var ev = ev || event;
+		var text = document.createElement('div');
+		text.innerHTML = '我只是来测试手机端能否通过长按触发事件的，呜呜';
+		document.body.appendChild(text);
+		ev.cancelBubble = true;
+		ev.preventDefault();
+	})
+</script>

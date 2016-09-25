@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+	var tapTimer=null;
+                        $('img').on("touchstart",function(E){
+                            E.preventDefault();E.stopPropagation();
+                            
+                            var el=this;var me=$(this);$("#tip").text("in touchstart");
+                            var t=E.touches[0];
+                            tapTimer=setTimeout(function(){me.trigger('touchend').trigger('longTap');},1500);
+                          
+                                    me.data("mx",t.pageX);me.data("my",t.pageY);
+                                    me.data("ex",el.offsetLeft);me.data("ey",el.offsetTop);
+
+                        })
+                        .on('touchmove',function(E){E.preventDefault();E.stopPropagation();
+                            if(tapTimer!=null)clearTimeout(tapTimer);
+                       var t=E.touches[0];
+                            var mx=parseInt(me.data("mx")),my=parseInt(me.data("my"));
+                            var ex=parseInt(me.data("ex")),ey=parseInt(me.data("ey"));
+                            var nx=ex+t.pageX - mx , ny=ey+t.pageY-my
+                           $("#tip").text("in touch move : "+"or mx,my, new mx,my or ex,ey="+mx+","+my+","+t.pageX+","+t.pageY+","+ex+","+ey+" dest x,y="+nx+","+ny);
+                            me.css({"left":nx+"px","top":ny+"px"}) ;
+
+                        })
+                        .on('touchend',function(E){
+                            if(tapTimer!=null)clearTimeout(tapTimer);
+                            //E.preventDefault();E.stopPropagation();
+                        });
+                       
+                        $('img').on("contextmenu",function(E){E.preventDefault();E.stopPropagation();E.returnValue=false; return false;})
+                                .on('longTap',function(E){E.stopPropagation();E.preventDefault()
+                            $.ui.actionsheet(
+                            [{
+                                text: 'back',
+                                cssClasses: 'red',
+                                handler: function () {
+                                    alert("Clicked Back")
+                                }
+                            }, {
+                                text: 'Alert Hi',
+                                cssClasses: 'blue',
+                                handler: function () {
+                                    alert("Hi");
+                                }
+                            }, {
+                                text: 'Alert Goodbye',
+                                cssClasses: '',
+                                handler: function () {
+                                    alert("Goodbye");
+                                }
+                            }]
+                        );
+                        });
+</script>
