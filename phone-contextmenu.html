@@ -19,6 +19,7 @@
 	// 	return false;
 	// }
 	window.onload = function(){
+		window.ontouchstart = function(e) { e.preventDefault(); };
 		document.documentElement.style.webkitTouchCallout='none';
 		document.addEventListener('contextmenu',function(ev){
 			var ev = ev || event;
